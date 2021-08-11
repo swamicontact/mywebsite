@@ -27,22 +27,6 @@ jobs:
       with:
         dotnet-version: 5.0.x
     
-    #To Add application dependencies to the project.
-    - name: Install dependencies
-      run: dotnet add package Newtonsoft.Json --version 12.0.1
-
-    #To resolve application dependencies.
-    - name: Install dependencies 
-      run: dotnet restore 
-
     #To build dotnet application using MSBuild
     - name: Build
-      run: dotnet msbuild
-      
-    #To Run application tests
-    - name: Test
-      run: dotnet test --no-build --verbosity normal
-    
-    #To Packackage dotnet Application
-    - name: Package
-      run: dotnet pack --configuration Release
+      run: dotnet build "mywebsite.sln"
