@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\tamilcloud1003\\source\\repos\\mywebsite\\mywebsite\\mywebsite.csproj": {}
+    "C:\\Users\\tamilcloud1003\\mywebsite\\mywebsite\\mywebsite.csproj": {}
   },
   "projects": {
-    "C:\\Users\\tamilcloud1003\\source\\repos\\mywebsite\\mywebsite\\mywebsite.csproj": {
+    "C:\\Users\\tamilcloud1003\\mywebsite\\mywebsite\\mywebsite.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\tamilcloud1003\\source\\repos\\mywebsite\\mywebsite\\mywebsite.csproj",
+        "projectUniqueName": "C:\\Users\\tamilcloud1003\\mywebsite\\mywebsite\\mywebsite.csproj",
         "projectName": "mywebsite",
-        "projectPath": "C:\\Users\\tamilcloud1003\\source\\repos\\mywebsite\\mywebsite\\mywebsite.csproj",
+        "projectPath": "C:\\Users\\tamilcloud1003\\mywebsite\\mywebsite\\mywebsite.csproj",
         "packagesPath": "C:\\Users\\tamilcloud1003\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\tamilcloud1003\\source\\repos\\mywebsite\\mywebsite\\obj\\",
+        "outputPath": "C:\\Users\\tamilcloud1003\\mywebsite\\mywebsite\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\tamilcloud1003\\AppData\\Roaming\\NuGet\\NuGet.Config",
