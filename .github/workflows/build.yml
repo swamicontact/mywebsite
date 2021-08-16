@@ -51,3 +51,17 @@ jobs:
      #To build dotnet application using MSBuild
       - name: Build
         run: msbuild ./mywebsite.sln
+        
+     #To Packackage dotnet Application
+      - name: Package
+        run: |
+          dotnet pack .\mywebsite --configuration Release
+          
+    #To Add nuget artifacts repository as source to push artifacts.
+      - name: AddSource
+        run: dotnet nuget add source ${{ secrets.NEXUS_URL }} --name "nexus" --username  ${{ secrets.NEXUS_USER_NAME }} --password ${{ secrets.NEXUS_PASSWORD }}
+
+    #To Push nuget package to artifacts repository using GitHub Secrets.
+      #- name: Push
+      #  run: |
+      #    dotnet nuget push "src\ApplicationCore\bin\Release\ApplicationCore.1.0.0.nupkg"  --api-key ${{ secrets.NEXUS_API_KEY }} --source "nexus"
