@@ -76,7 +76,7 @@ jobs:
           $ArtifactName = "mywebsite"
           $timestamp = Get-Date -Format "yyyy-MM-dd-HH-mm-ss"
           $NexusArtifactName = "$ArtifactName-$timestamp"
-          Compress-Archive D:\a\mywebsite\mywebsite\mywebsite\bin\Release\netcoreapp3.1\publish\ .\$NexusArtifactName
+          Compress-Archive D:\a\mywebsite\mywebsite\mywebsite\bin\Release\netcoreapp3.1\publish\* .\$NexusArtifactName
           $NexusPassword = ConvertTo-SecureString "admin" -AsPlainText -Force
           $NexusCred = New-Object System.Management.Automation.PSCredential ( "admin" , $NexusPassword)
           $ArtifactSourceFile = "D:\a\mywebsite\mywebsite\$NexusArtifactName.zip"
