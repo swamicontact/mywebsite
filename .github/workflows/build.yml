@@ -77,7 +77,7 @@ jobs:
     #To Set PSCredentials.
       - name: PSCredentials
         run: |
-          $NexusPassword = ConvertTo-SecureString "admin" -AsPlainText -Force
+          $NexusPassword = ConvertTo-SecureString "admin" -AllowUnencryptedAuthentication -AsPlainText -Force
           $NexusCred = New-Object System.Management.Automation.PSCredential ( "admin" , $NexusPassword)
           Invoke-WebRequest -uri http://34.132.65.36:8081/repository/raw_repo/mywebsite.zip -Method Put -Infile D:\a\mywebsite\mywebsite\mywebsite\bin\Release\netcoreapp3.1\publish\mywebsite.zip -ContentType 'application/zip' -Credential $NexusCred
           
