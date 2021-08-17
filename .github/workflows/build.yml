@@ -70,5 +70,9 @@ jobs:
       - name: Publish
         run: dotnet publish --configuration release
         
+    #To Compress the Application.
+      - name: Compress
+        run: Compress-Archive D:\a\mywebsite\mywebsite\mywebsite\bin\Release\netcoreapp3.1\publish\ * D:\a\mywebsite\mywebsite\mywebsite\bin\Release\netcoreapp3.1\publish\mywebsite.zip
+        
         
         
