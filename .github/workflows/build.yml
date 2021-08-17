@@ -80,5 +80,7 @@ jobs:
           $NexusPassword = ConvertTo-SecureString "admin" -AsPlainText -Force
           $NexusCred = New-Object System.Management.Automation.PSCredential ( "admin" , $NexusPassword)
           
-       # $NexusPassword = ConvertTo-SecureString ${{ secrets.NEXUS_PASSWORD }} -AsPlainText -Force
-#          $NexusCred = New-Object System.Management.Automation.PSCredential ( ${{ secrets.NEXUS_USER_NAME }} , NexusPassword)
+    #To Push Compressed Application to Nexus Repo.
+      - name: PushToNexus
+        run: Invoke-WebRequest -uri http://34.132.65.36:8081/repository/raw_repo/mywebsite.zip -Method Put -Infile D:\a\mywebsite\mywebsite\mywebsite\bin\Release\netcoreapp3.1\publish\mywebsite.zip -ContentType 'application/zip' -Credential $NexusCred
+        
