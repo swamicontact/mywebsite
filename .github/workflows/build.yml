@@ -78,8 +78,11 @@ jobs:
     #To Compress the Application.
       - name: Compress2
         run: |
-          pwd
-          Compress-Archive D:\a\mywebsite\mywebsite\mywebsite\bin\Release\netcoreapp3.1\publish\ mywebsite.zip
+          For /f "tokens=2-4 delims=/ " %%a in ('date /t') do (set mydate=%%c-%%a-%%b)
+          For /f "tokens=1-2 delims=/:" %%a in ("%TIME%") do (set mytime=%%a%%b)
+          $dt=mywebsite%mydate%_%mytime%.zip
+          Compress-Archive D:\a\mywebsite\mywebsite\mywebsite\bin\Release\netcoreapp3.1\publish\ $dt
+          echo $dt
           pwd
         
     #To Set PSCredentials.
