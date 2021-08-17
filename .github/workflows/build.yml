@@ -78,5 +78,5 @@ jobs:
       - name: PSCredentials
         run: |
           $NexusPassword = ConvertTo-SecureString ${{ secrets.NEXUS_PASSWORD }} -AsPlainText -Force
-          $NexusCred = New-Object System.Management.Automation.PSCredential ( ${{ secrets.NEXUS_USER_NAME }} , $NexusPassword)
+          $NexusCred = New-Object System.Management.Automation.PSCredential ( ${{ secrets.NEXUS_USER_NAME }} , NexusPassword)
           
