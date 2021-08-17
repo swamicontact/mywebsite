@@ -80,6 +80,7 @@ jobs:
           $NexusPassword = ConvertTo-SecureString "admin" -AsPlainText -Force
           $NexusCred = New-Object System.Management.Automation.PSCredential ( "admin" , $NexusPassword)
           $ArtifactSourceFile = "D:\a\mywebsite\mywebsite\$NexusArtifactName.zip"
+          echo $ArtifactSourceFile
           Invoke-WebRequest -uri http://34.132.65.36:8081/repository/raw_repo/mywebsite.zip -Method Put -Infile $ArtifactSourceFile -Credential $NexusCred -AllowUnencryptedAuthentication
           
     #To Push Compressed Application to Nexus Repo.
