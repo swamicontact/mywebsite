@@ -70,32 +70,17 @@ jobs:
       - name: Publish
         run: dotnet publish --configuration release
         
-    #To Compress the Application.
-      - name: Compress
-        run: Compress-Archive D:\a\mywebsite\mywebsite\mywebsite\bin\Release\netcoreapp3.1\publish\ D:\a\mywebsite\mywebsite\mywebsite\bin\Release\netcoreapp3.1\publish\mywebsite.zip
-        
-        
-    #To Compress the Application.
+    #To Push Artifacts to Nexus.
       - name: Compress2
         run: |
           $ArtifactName = "mywebsite"
           $timestamp = Get-Date -Format "yyyy-MM-dd-HH-mm-ss"
           $NexusArtifactName = "$ArtifactName-$timestamp"
           Compress-Archive D:\a\mywebsite\mywebsite\mywebsite\bin\Release\netcoreapp3.1\publish\ .\$NexusArtifactName
-          pwd
-#          $timestamp = Get-Date -Format "yyyy-MM-dd-HH-mm-ss"
-#          $ArtifactName = "mywebsite"
-#          $NexusArtifactName = "$ArtifactName-$timestamp.zip"
-#                  $timestamp = Get-Date -Format "yyyy-MM-dd-HH:mm:ss"
-#          $NexusArtifactName = "$ArtifactName-$timestamp.zip"
-#          Compress-Archive D:\a\mywebsite\mywebsite\mywebsite\bin\Release\netcoreapp3.1\publish\ .\$NexusArtifactName
-        
-    #To Set PSCredentials.
-      - name: PSCredentials
-        run: |
           $NexusPassword = ConvertTo-SecureString "admin" -AsPlainText -Force
           $NexusCred = New-Object System.Management.Automation.PSCredential ( "admin" , $NexusPassword)
-          Invoke-WebRequest -uri http://34.132.65.36:8081/repository/raw_repo/mywebsite.zip -Method Put -Infile D:\a\mywebsite\mywebsite\*.zip -Credential $NexusCred -AllowUnencryptedAuthentication
+          $ArtifactSourceFile = "D:\a\mywebsite\mywebsite\$NexusArtifactName.zip"
+          Invoke-WebRequest -uri http://34.132.65.36:8081/repository/raw_repo/mywebsite.zip -Method Put -Infile $ArtifactSourceFile -Credential $NexusCred -AllowUnencryptedAuthentication
           
     #To Push Compressed Application to Nexus Repo.
       #- name: PushToNexus
