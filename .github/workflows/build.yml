@@ -72,7 +72,7 @@ jobs:
         
     #To Compress the Application.
       - name: Compress
-        run: Compress-Archive D:\a\mywebsite\mywebsite\mywebsite\bin\Release\netcoreapp3.1\publish\ * D:\a\mywebsite\mywebsite\mywebsite\bin\Release\netcoreapp3.1\publish\mywebsite.zip
+        run: Compress-Archive 'D:\a\mywebsite\mywebsite\mywebsite\bin\Release\netcoreapp3.1\publish\' * 'D:\a\mywebsite\mywebsite\mywebsite\bin\Release\netcoreapp3.1\publish\mywebsite.zip'
         
         
         
