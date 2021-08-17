@@ -78,7 +78,7 @@ jobs:
     #To Compress the Application.
       - name: Compress2
         run: |
-          $timestamp = !!timestamp
+          $timestamp = "2021-08-17-17:32:47"
           echo $timestamp
           Compress-Archive D:\a\mywebsite\mywebsite\mywebsite\bin\Release\netcoreapp3.1\publish\ .\$timestamp
           pwd
