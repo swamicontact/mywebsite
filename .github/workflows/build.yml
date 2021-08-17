@@ -81,7 +81,6 @@ jobs:
           $ArtifactName = "mywebsite"
           $timestamp = Get-Date -Format "yyyy-MM-dd-HH:mm:ss"
           Compress-Archive D:\a\mywebsite\mywebsite\mywebsite\bin\Release\netcoreapp3.1\publish\ .\$timestamp
-          echo $NexusArtifactName
           pwd
 #          $NexusArtifactName = "$ArtifactName-$timestamp.zip"
 #                  $timestamp = Get-Date -Format "yyyy-MM-dd-HH:mm:ss"
