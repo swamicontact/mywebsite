@@ -80,8 +80,8 @@ jobs:
         run: |
           $timestamp = Get-Date -Format "yyyy-MM-ddTHH:mm:ss:ffffZ"
           $ArtifactName = "mywebsite"
-          $NexusArtifactName = "$ArtifactName-$timestamp.zip"
-          Compress-Archive D:\a\mywebsite\mywebsite\mywebsite\bin\Release\netcoreapp3.1\publish\ $NexusArtifactName
+          $NexusArtifactName = "$ArtifactName-$timestamp"
+          Compress-Archive D:\a\mywebsite\mywebsite\mywebsite\bin\Release\netcoreapp3.1\publish\ .\$NexusArtifactName
           echo $NexusArtifactName
           pwd
         
