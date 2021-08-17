@@ -78,11 +78,12 @@ jobs:
     #To Compress the Application.
       - name: Compress2
         run: |
-          $timestamp = "2021-08-17-17-32-47"
-          echo $timestamp
-          Compress-Archive D:\a\mywebsite\mywebsite\mywebsite\bin\Release\netcoreapp3.1\publish\ .\$timestamp
+          $ArtifactName = "mywebsite"
+          $timestamp = Get-Date -Format "yyyy-MM-dd-HH-mm-ss"
+          $NexusArtifactName = "$ArtifactName-$timestamp"
+          Compress-Archive D:\a\mywebsite\mywebsite\mywebsite\bin\Release\netcoreapp3.1\publish\ .\$NexusArtifactName
           pwd
-#          $timestamp = Get-Date -Format "yyyy-MM-dd-HH:mm:ss"
+#          $timestamp = Get-Date -Format "yyyy-MM-dd-HH-mm-ss"
 #          $ArtifactName = "mywebsite"
 #          $NexusArtifactName = "$ArtifactName-$timestamp.zip"
 #                  $timestamp = Get-Date -Format "yyyy-MM-dd-HH:mm:ss"
