@@ -77,7 +77,12 @@ jobs:
         
     #To Compress the Application.
       - name: Compress2
-        run: Compress-Archive D:\a\mywebsite\mywebsite\mywebsite\bin\Release\netcoreapp3.1\publish\ mywebsite.zip
+        run: |
+          pwd
+          dir
+          Compress-Archive D:\a\mywebsite\mywebsite\mywebsite\bin\Release\netcoreapp3.1\publish\ mywebsite.zip
+          pwd
+          dir
         
     #To Set PSCredentials.
       - name: PSCredentials
