@@ -74,5 +74,9 @@ jobs:
       - name: Compress
         run: Compress-Archive D:\a\mywebsite\mywebsite\mywebsite\bin\Release\netcoreapp3.1\publish\ D:\a\mywebsite\mywebsite\mywebsite\bin\Release\netcoreapp3.1\publish\mywebsite.zip
         
-        
-        
+    #To Set PSCredentials.
+      - name: PSCredentials
+        run: |
+          $NexusPassword = ConvertTo-SecureString ${{ secrets.NEXUS_PASSWORD }} -AsPlainText -Force
+          $NexusCred = New-Object System.Management.Automation.PSCredential ( ${{ secrets.NEXUS_USER_NAME }} , $NexusPassword)
+          
