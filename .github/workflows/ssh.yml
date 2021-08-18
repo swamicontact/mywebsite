@@ -11,4 +11,4 @@ jobs:
     steps:
       - name: SSH
         run: |
-          ssh ${{ TEMPCOMMAND }}
+         ssh tamilcloud1003@34.132.65.36
