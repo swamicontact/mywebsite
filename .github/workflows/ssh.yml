@@ -14,5 +14,5 @@ jobs:
         password: ${{ secrets.SSH_PASSWORD }}
         port: ${{ secrets.SSH_PORT }}
         script: 
-          copy C:\Users\tamilcloud1003\Downloads\mywebsite-2021-08-18-08-26-05.zip c:\inetpub\wwwroot\mywebsite
+          copy C:\Users\tamilcloud1003\Downloads\mywebsite-2021-08-18-08-26-05.zip c:\inetpub\wwwroot\mywebsite;
           Expand-Archive c:\inetpub\wwwroot\mywebsite\mywebsite-2021-08-18-08-26-05.zip c:\inetpub\wwwroot\mywebsite
