@@ -1,20 +1,19 @@
-name: remote ssh command
-on: [push]
-jobs:
+name: SSH
+on:
+  push:
+    branches:
+      - main # or the name of your main branch
 
-  ssh:
+jobs:
+  build:
     name: SSH
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
     steps:
-    - name: executing remote ssh commands using password
-      uses: appleboy/ssh-action@master
-      with:
-        host: ${{ secrets.SSH_HOST }}
-        username: ${{ secrets.SSH_USERNAME }}
-        password: ${{ secrets.SSH_PASSWORD }}
-        port: ${{ secrets.SSH_PORT }}
-        script: |
+      - name: SSH
+        shell: powershell
+        run: |
+          pwd
           dir
           cd c:\inetpub\wwwroot\mywebsite\
+          pwd
           dir
-
