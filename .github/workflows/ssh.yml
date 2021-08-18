@@ -12,4 +12,4 @@ jobs:
       - name: SSH
         shell: powershell
         run: |
-          ssh ${{SSH_USERNAME}}@${{SSH_HOST}}
+          ssh ${{ SSH_USERNAME }} @ ${{ SSH_HOST }}
