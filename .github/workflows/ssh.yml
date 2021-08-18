@@ -1,14 +1,16 @@
-name: SSH
-on:
-  push:
-    branches:
-      - main # or the name of your main branch
-
+name: remote ssh command
+on: [push]
 jobs:
+
   build:
-    name: SSH
-    runs-on: windows-latest
+    name: Build
+    runs-on: ubuntu-latest
     steps:
-      - name: SSH
-        run: |
-         ssh tamilcloud1003@34.132.65.36
+    - name: executing remote ssh commands using password
+      uses: appleboy/ssh-action@master
+      with:
+        host: ${{ secrets.SSH_HOST }}
+        username: ${{ secrets.SSH_USERNAME }}
+        password: ${{ secrets.SSH_KEY }}
+        port: ${{ secrets.SSH_PORT }}
+        script: dir
