@@ -12,11 +12,12 @@ jobs:
       - name: winrm
         shell: powershell
         run: |
-          systeminfo
-          Get-Host | Select-Object Version
-          whoami
+          #systeminfo
+          #Get-Host | Select-Object Version
+          #whoami
           #winrm quickconfig
           #Get-Item WSMan:\localhost\Client\TrustedHosts
           #Set-Item WSMan:\localhost\Client\TrustedHosts -Value *
           Set-Item wsman:\localhost\Client\TrustedHosts 34.132.65.36 -Concatenate -Force
+          Get-Item WSMan:\localhost\Client\TrustedHosts
           #Set-Item WSMan:\localhost\Client\TrustedHosts -Value ${{ secrets.WINRM_HOST }}
