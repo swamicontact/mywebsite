@@ -12,4 +12,5 @@ jobs:
       - name: winrm
         shell: powershell
         run: |
+          winrm quickconfig
           Set-Item WSMan:\localhost\Client\TrustedHosts -Value ${{ secrets.WINRM_HOST }}
