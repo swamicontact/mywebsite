@@ -12,6 +12,7 @@ jobs:
       - name: winrm
         shell: powershell
         run: |
+          winver
           Get-Host | Select-Object Version
           #winrm quickconfig
           Get-Item WSMan:\localhost\Client\TrustedHosts
