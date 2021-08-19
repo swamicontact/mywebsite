@@ -85,13 +85,12 @@ jobs:
           
     #To Push Artifacts to IIS.
       - name: winrm
-        shell: powershell
         run: |
           Set-Item wsman:\localhost\Client\TrustedHosts ${{ secrets.WINRM_HOST }} -Concatenate -Force
           $WinRMPassword = ConvertTo-SecureString "${{ secrets.WINRM_PASSWORD }}" -AsPlainText -Force
           $WinRMCredential = New-Object System.Management.Automation.PSCredential ( "${{ secrets.WINRM_USERNAME }}" , $WinRMPassword)
           Enter-PSSession -ComputerName ${{ secrets.WINRM_HOST }} -Credential $WinRMCredential
-          Invoke-Command -ComputerName ${{ secrets.WINRM_HOST }} -ScriptBlock { cd c:\inetpub\wwwroot\mywebsite\; dir; del *; dir; $NexusPassword = ConvertTo-SecureString "${{ secrets.NEXUS_PASSWORD }}" -AsPlainText -Force; $NexusCred = New-Object System.Management.Automation.PSCredential ( "${{ secrets.NEXUS_USERNAME }}" , $NexusPassword); $NexusArtifactUri = "${{ secrets.NEXUS_RAW_REPO_URL }}/mywebsite-2021-08-19-06-54-24.zip"; Invoke-WebRequest -uri $NexusArtifactUri -o mywebsite-2021-08-19-06-54-24.zip -Credential $NexusCred; dir; pwd; Expand-Archive c:\inetpub\wwwroot\mywebsite\mywebsite-2021-08-19-06-54-24.zip c:\inetpub\wwwroot\mywebsite\; } -credential $WinRMCredential
+          Invoke-Command -ComputerName ${{ secrets.WINRM_HOST }} -ScriptBlock { cd c:\inetpub\wwwroot\mywebsite\; dir; $NexusPassword = ConvertTo-SecureString "admin" -AsPlainText -Force; $NexusCred = New-Object System.Management.Automation.PSCredential ( "admin" , $NexusPassword); $NexusArtifactUri = "http://34.132.65.36:8081/repository/raw_repo/mywebsite-2021-08-19-06-54-24.zip"; Invoke-WebRequest -uri $NexusArtifactUri -o mywebsite-2021-08-19-06-54-24.zip -Credential $NexusCred; dir; pwd; Expand-Archive c:\inetpub\wwwroot\mywebsite\mywebsite-2021-08-19-06-54-24.zip c:\inetpub\wwwroot\mywebsite\; } -credential $WinRMCredential
 
 #      - uses: actions/upload-artifact@v2
 #        with:
