@@ -17,7 +17,7 @@ jobs:
           $WinRMCredential = New-Object System.Management.Automation.PSCredential ( "${{ secrets.WINRM_USERNAME }}" , $WinRMPassword)
           Enter-PSSession -ComputerName ${{ secrets.WINRM_HOST }} -Credential $WinRMCredential
           #Invoke-Command -ComputerName ${{ secrets.WINRM_HOST }} -ScriptBlock { cd c:\inetpub\wwwroot\mywebsite\; dir; type HEY_I_AM_HERE.txt} -credential $WinRMCredential
-          Invoke-Command -ComputerName ${{ secrets.WINRM_HOST }} -ScriptBlock { cd c:\inetpub\wwwroot\mywebsite\; dir; $NexusPassword = ConvertTo-SecureString "admin" -AsPlainText -Force; $NexusCred = New-Object System.Management.Automation.PSCredential ( "admin" , $NexusPassword); $NexusArtifactUri = "http://34.132.65.36:8081/repository/raw_repo/mywebsite-2021-08-19-06-54-24.zip"; Invoke-WebRequest -uri $NexusArtifactUri -Credential $NexusCred; Extract-Archive .\mywebsite-2021-08-19-06-54-24.zip .; } -credential $WinRMCredential
+          Invoke-Command -ComputerName ${{ secrets.WINRM_HOST }} -ScriptBlock { cd c:\inetpub\wwwroot\mywebsite\; dir; $NexusPassword = ConvertTo-SecureString "admin" -AsPlainText -Force; $NexusCred = New-Object System.Management.Automation.PSCredential ( "admin" , $NexusPassword); $NexusArtifactUri = "http://34.132.65.36:8081/repository/raw_repo/mywebsite-2021-08-19-06-54-24.zip"; Invoke-WebRequest -uri $NexusArtifactUri -Credential $NexusCred; Expand-Archive .\mywebsite-2021-08-19-06-54-24.zip .; } -credential $WinRMCredential
           
 #          $ArtifactSourceFile = "D:\a\mywebsite\mywebsite\$NexusArtifactName.zip"; 
 #          $ArtifactDestinationUri = "http://34.132.65.36:8081/repository/raw_repo/$NexusArtifactName.zip"; 
