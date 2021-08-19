@@ -78,7 +78,7 @@ jobs:
           $NexusArtifactName = "$ArtifactName-$timestamp"
           Compress-Archive D:\a\mywebsite\mywebsite\mywebsite\bin\Release\netcoreapp3.1\publish\* .\$NexusArtifactName
           $NexusPassword = ConvertTo-SecureString "${{ secrets.NEXUS_PASSWORD }}" -AsPlainText -Force
-          $NexusCred = New-Object System.Management.Automation.PSCredential ( "${{ secrets.NEXUS_USER_NAME }}}" , $NexusPassword)
+          $NexusCred = New-Object System.Management.Automation.PSCredential ( ${{ secrets.NEXUS_USER_NAME }}} , $NexusPassword)
           $ArtifactSourceFile = "D:\a\mywebsite\mywebsite\$NexusArtifactName.zip"
           $ArtifactDestinationUri = "${{ secrets.NEXUS_RAW_REPO_URL }}/$NexusArtifactName.zip"
           Invoke-WebRequest -uri $ArtifactDestinationUri -Method Put -Infile $ArtifactSourceFile -Credential $NexusCred -AllowUnencryptedAuthentication
