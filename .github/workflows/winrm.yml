@@ -1,0 +1,15 @@
+name: winrm
+on:
+  push:
+    branches:
+      - main # or the name of your main branch
+
+jobs:
+  build:
+    name: winrm
+    runs-on: windows-latest
+    steps:
+      - name: winrm
+        shell: powershell
+        run: |
+          Set-Item WSMan:\localhost\Client\TrustedHosts -Value ${{ secrets.WINRM_HOST }}
