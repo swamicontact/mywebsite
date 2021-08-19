@@ -83,10 +83,10 @@ jobs:
           $ArtifactDestinationUri = "http://34.132.65.36:8081/repository/raw_repo/$NexusArtifactName.zip"
           Invoke-WebRequest -uri $ArtifactDestinationUri -Method Put -Infile $ArtifactSourceFile -Credential $NexusCred -AllowUnencryptedAuthentication
 
-      - uses: actions/upload-artifact@v2
-        with:
-          name: Push-Artifacts
-          path: .\*.zip
+#      - uses: actions/upload-artifact@v2
+#        with:
+#          name: Push-Artifacts
+#          path: .\*.zip
 
 #    #To Push Artifacts to IIS.
 #      - uses: actions/checkout@v1
