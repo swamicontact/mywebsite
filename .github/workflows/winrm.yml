@@ -17,5 +17,5 @@ jobs:
           whoami
           #winrm quickconfig
           Get-Item WSMan:\localhost\Client\TrustedHosts
-          #Set-Item WSMan:\localhost\Client\TrustedHosts -Value "34.132.65.36"
+          Set-Item WSMan:\localhost\Client\TrustedHosts -Value *
           #Set-Item WSMan:\localhost\Client\TrustedHosts -Value ${{ secrets.WINRM_HOST }}
