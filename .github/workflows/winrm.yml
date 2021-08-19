@@ -12,6 +12,7 @@ jobs:
       - name: winrm
         shell: powershell
         run: |
+          Get-Host | Select-Object Version
           #winrm quickconfig
           Get-Item WSMan:\localhost\Client\TrustedHosts
           Set-Item WSMan:\localhost\Client\TrustedHosts -Value "34.132.65.36"
