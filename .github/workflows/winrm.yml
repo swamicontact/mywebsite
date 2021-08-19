@@ -12,6 +12,6 @@ jobs:
       - name: winrm
         shell: powershell
         run: |
-          winrm quickconfig
+          #winrm quickconfig
           Get-Item WSMan:\localhost\Client\TrustedHosts
-          Set-Item WSMan:\localhost\Client\TrustedHosts -Value ${{ secrets.WINRM_HOST }}
+          #Set-Item WSMan:\localhost\Client\TrustedHosts -Value ${{ secrets.WINRM_HOST }}
