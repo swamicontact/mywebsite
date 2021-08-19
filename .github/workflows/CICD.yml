@@ -82,16 +82,12 @@ jobs:
           $ArtifactName = "mywebsite"
           $timestamp = Get-Date -Format "yyyy-MM-dd-HH-mm-ss"
           $NexusArtifactName = "$ArtifactName-$timestamp"
-          
-          #####Push Artifacts to Nexus Repository#####
           Compress-Archive D:\a\mywebsite\mywebsite\mywebsite\bin\Release\netcoreapp3.1\publish\* .\$NexusArtifactName
           $NexusPassword = ConvertTo-SecureString "${{ secrets.NEXUS_PASSWORD }}" -AsPlainText -Force
           $NexusCred = New-Object System.Management.Automation.PSCredential ( "${{ secrets.NEXUS_USER_NAME }}" , $NexusPassword)
           $ArtifactSourceFile = "D:\a\mywebsite\mywebsite\$NexusArtifactName.zip"
           $ArtifactDestinationUri = "${{ secrets.NEXUS_RAW_REPO_URL }}/$NexusArtifactName.zip"
           Invoke-WebRequest -uri $ArtifactDestinationUri -Method Put -Infile $ArtifactSourceFile -Credential $NexusCred -AllowUnencryptedAuthentication
-          
-          #####Publish Artifacts to IIS Server#####
           Set-Item wsman:\localhost\Client\TrustedHosts ${{ secrets.WINRM_HOST }} -Concatenate -Force
           $WinRMPassword = ConvertTo-SecureString "${{ secrets.WINRM_PASSWORD }}" -AsPlainText -Force
           $WinRMCredential = New-Object System.Management.Automation.PSCredential ( "${{ secrets.WINRM_USERNAME }}" , $WinRMPassword)
