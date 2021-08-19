@@ -82,6 +82,8 @@ jobs:
           $ArtifactSourceFile = "D:\a\mywebsite\mywebsite\$NexusArtifactName.zip"
           $ArtifactDestinationUri = "${{ secrets.NEXUS_RAW_REPO_URL }}/$NexusArtifactName.zip"
           Invoke-WebRequest -uri $ArtifactDestinationUri -Method Put -Infile $ArtifactSourceFile -Credential $NexusCred -AllowUnencryptedAuthentication
+          $ArtifactDestinationUriLatest = "${{ secrets.NEXUS_RAW_REPO_URL }}/$ArtifactName-latest.zip"
+          Invoke-WebRequest -uri $ArtifactDestinationUriLatest -Method Put -Infile $ArtifactSourceFile -Credential $NexusCred -AllowUnencryptedAuthentication
           
     #To Push Artifacts to Git repository.
       - uses: actions/upload-artifact@v2
@@ -96,4 +98,4 @@ jobs:
           $WinRMPassword = ConvertTo-SecureString "${{ secrets.WINRM_PASSWORD }}" -AsPlainText -Force
           $WinRMCredential = New-Object System.Management.Automation.PSCredential ( "${{ secrets.WINRM_USERNAME }}" , $WinRMPassword)
           Enter-PSSession -ComputerName ${{ secrets.WINRM_HOST }} -Credential $WinRMCredential
-          Invoke-Command -ComputerName ${{ secrets.WINRM_HOST }} -ScriptBlock { cd c:\inetpub\wwwroot\mywebsite\; Remove-Item C:\inetpub\wwwroot\mywebsite\* -Recurse -Force -Confirm:$false; $NexusPassword = ConvertTo-SecureString "${{ secrets.NEXUS_PASSWORD }}" -AsPlainText -Force; $NexusCred = New-Object System.Management.Automation.PSCredential ( "${{ secrets.NEXUS_USER_NAME }}" , $NexusPassword); $NexusArtifactUri = "${{ secrets.NEXUS_RAW_REPO_URL }}/mywebsite-2021-08-19-06-54-24.zip"; Invoke-WebRequest -uri $NexusArtifactUri -o mywebsite-2021-08-19-06-54-24.zip -Credential $NexusCred; Expand-Archive c:\inetpub\wwwroot\mywebsite\mywebsite-2021-08-19-06-54-24.zip c:\inetpub\wwwroot\mywebsite\; Exit-PSSession } -credential $WinRMCredential
+          Invoke-Command -ComputerName ${{ secrets.WINRM_HOST }} -ScriptBlock { cd c:\inetpub\wwwroot\mywebsite\; Remove-Item C:\inetpub\wwwroot\mywebsite\* -Recurse -Force -Confirm:$false; $NexusPassword = ConvertTo-SecureString "${{ secrets.NEXUS_PASSWORD }}" -AsPlainText -Force; $NexusCred = New-Object System.Management.Automation.PSCredential ( "${{ secrets.NEXUS_USER_NAME }}" , $NexusPassword); $NexusArtifactUri = "${{ secrets.NEXUS_RAW_REPO_URL }}/mywebsite-latest.zip"; Invoke-WebRequest -uri $NexusArtifactUri -o mywebsite-latest.zip -Credential $NexusCred; Expand-Archive c:\inetpub\wwwroot\mywebsite\mywebsite-latest.zip c:\inetpub\wwwroot\mywebsite\; Exit-PSSession } -credential $WinRMCredential
