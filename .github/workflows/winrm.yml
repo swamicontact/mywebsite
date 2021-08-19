@@ -13,8 +13,8 @@ jobs:
         shell: powershell
         run: |
           Set-Item wsman:\localhost\Client\TrustedHosts ${{ secrets.WINRM_HOST }} -Concatenate -Force
-          $WinRMPassword = ConvertTo-SecureString ${{ secrets.WINRM_PASSWORD }} -AsPlainText -Force
-          $WinRMCredential = New-Object System.Management.Automation.PSCredential ( ${{ secrets.WINRM_USERNAME }} , $WinRMPassword)
+          $WinRMPassword = ConvertTo-SecureString "${{ secrets.WINRM_PASSWORD }}" -AsPlainText -Force
+          $WinRMCredential = New-Object System.Management.Automation.PSCredential ( "${{ secrets.WINRM_USERNAME }}" , $WinRMPassword)
           Enter-PSSession -ComputerName ${{ secrets.WINRM_HOST }} -Credential $WinRMCredential
           dir
           
