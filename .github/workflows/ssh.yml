@@ -17,10 +17,4 @@ jobs:
         
       - name: List All Files
         run: |
-          pwd
-          ls -altr
-          echo "${{ secrets.SSH_USERNAME }}@${{ secrets.SSH_HOST }}" 
-        
-      - name: Deploy with rsync
-        run: |
           ssh ${{ secrets.SSH_USERNAME }}@${{ secrets.SSH_HOST }}
