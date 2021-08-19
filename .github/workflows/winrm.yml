@@ -15,4 +15,5 @@ jobs:
           Set-Item wsman:\localhost\Client\TrustedHosts ${{ secrets.WINRM_HOST }} -Concatenate -Force
           $WinRMPassword = ConvertTo-SecureString "${{ secrets.WINRM_PASSWORD }}" -AsPlainText -Force
           $WinRMCredential = New-Object System.Management.Automation.PSCredential ( "${{ secrets.WINRM_USERNAME }}" , $WinRMPassword)
-          Enter-PSSession -ComputerName ${{ secrets.WINRM_HOST }} -Credential $WinRMCredential | dir
+          Enter-PSSession -ComputerName ${{ secrets.WINRM_HOST }} -Credential $WinRMCredential
+          Invoke-Command -ComputerName ${{ secrets.WINRM_HOST }} -ScriptBlock { cd c:\Users\TamilCloud1003\; dir;} -credential $WinRMCredential
