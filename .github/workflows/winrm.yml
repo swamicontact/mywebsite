@@ -16,4 +16,4 @@ jobs:
           $WinRMPassword = ConvertTo-SecureString "${{ secrets.WINRM_PASSWORD }}" -AsPlainText -Force
           $WinRMCredential = New-Object System.Management.Automation.PSCredential ( "${{ secrets.WINRM_USERNAME }}" , $WinRMPassword)
           Enter-PSSession -ComputerName ${{ secrets.WINRM_HOST }} -Credential $WinRMCredential
-          Invoke-Command -ComputerName ${{ secrets.WINRM_HOST }} -ScriptBlock { cd c:\inetpub\wwwroot\mywebsite\; dir;} -credential $WinRMCredential
+          Invoke-Command -ComputerName ${{ secrets.WINRM_HOST }} -ScriptBlock { cd c:\inetpub\wwwroot\mywebsite\; dir; type HEY_I_AM_HERE.txt} -credential $WinRMCredential
