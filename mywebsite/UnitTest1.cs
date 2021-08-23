@@ -25,7 +25,7 @@ namespace NUnitDotNetCoreDemo {
 
         [Test]
         public void IsTrue() {
-            Assert.That(2 + 2 == 4, Is.True);
+            Assert.That(2 + 2 == 4, Is.False);
         }
 
         [Test]
