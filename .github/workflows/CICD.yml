@@ -66,8 +66,12 @@ jobs:
     #To Push nuget package to artifacts repository using GitHub Secrets.
       - name: Push Nuget Package
         run: |
-          dotnet nuget push "D:\a\mywebsite\mywebsite\mywebsite\bin\Release\mywebsite.1.0.0.nupkg"  --api-key ${{ secrets.NEXUS_API_KEY }} --source "nexus"
-          dotnet nuget push "D:\a\mywebsite\mywebsite\mywebsite\bin\Release\mywebsite.1.0.0.nupkg"  --api-key ${{ secrets.TOKEN_GITHUB }} --source "github" --skip-duplicate
+          dotnet nuget list
+          dotnet nuget delete mywebsite 1.0.0
+          dotnet nuget list
+          
+#          dotnet nuget push "D:\a\mywebsite\mywebsite\mywebsite\bin\Release\mywebsite.1.0.0.nupkg"  --api-key ${{ secrets.NEXUS_API_KEY }} --source "nexus"
+#          dotnet nuget push "D:\a\mywebsite\mywebsite\mywebsite\bin\Release\mywebsite.1.0.0.nupkg"  --api-key ${{ secrets.TOKEN_GITHUB }} --source "github" --skip-duplicate
 
     #To Test Using NUnit.
       - name: Nunit Testing
