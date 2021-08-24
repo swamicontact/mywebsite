@@ -59,7 +59,7 @@ jobs:
           
     #To Add nuget artifacts repository as source to push artifacts.
       - name: AddSource
-        run: dotnet nuget add source ${{ secrets.NEXUS_URL }} --name "nexus" --username  ${{ secrets.NEXUS_USER_NAME }} --password ${{ secrets.NEXUS_PASSWORD }}
+        run: dotnet nuget add source ${{ secrets.NEXUS_URL_NUGET }} --name "nexus" --username  ${{ secrets.NEXUS_USER_NAME }} --password ${{ secrets.NEXUS_PASSWORD }}
 
     #To Push nuget package to artifacts repository using GitHub Secrets.
       - name: Push
