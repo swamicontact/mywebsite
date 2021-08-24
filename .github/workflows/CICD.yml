@@ -97,7 +97,7 @@ jobs:
     #To Push Artifacts to Git repository.
       - uses: actions/upload-artifact@v2
         with:
-          name: "mywebsite-latest.zip"
+          name: "mywebsite.zip"
           path: .\*.zip
           
     #To Push Artifacts to IIS.
