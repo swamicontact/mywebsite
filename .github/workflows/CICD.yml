@@ -80,7 +80,7 @@ jobs:
           $ArtifactName = "mywebsite"
           $timestamp = Get-Date -Format "yyyy-MM-dd-HH-mm-ss"
           $runnumber = $env:GITHUB_RUN_NUMBER
-          $NexusArtifactName = "$ArtifactName-$run-number"
+          $NexusArtifactName = "$ArtifactName-$runnumber"
           Compress-Archive D:\a\mywebsite\mywebsite\mywebsite\bin\Release\netcoreapp3.1\publish\* .\$NexusArtifactName
           $NexusPassword = ConvertTo-SecureString "${{ secrets.NEXUS_PASSWORD }}" -AsPlainText -Force
           $NexusCred = New-Object System.Management.Automation.PSCredential ( "${{ secrets.NEXUS_USER_NAME }}" , $NexusPassword)
