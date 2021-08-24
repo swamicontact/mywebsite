@@ -53,7 +53,7 @@ jobs:
         run: msbuild ./mywebsite.sln
         
      #To Packackage dotnet Application
-      - name: Package
+      - name: Package Nuget Package
         run: |
           dotnet pack .\mywebsite --configuration Release
           
@@ -62,7 +62,7 @@ jobs:
         run: dotnet nuget add source ${{ secrets.NEXUS_URL_NUGET }} --name "nexus" --username  ${{ secrets.NEXUS_USER_NAME }} --password ${{ secrets.NEXUS_PASSWORD }}
 
     #To Push nuget package to artifacts repository using GitHub Secrets.
-      - name: Push
+      - name: Push Nuget Package
         run: |
           dotnet nuget push "D:\a\mywebsite\mywebsite\mywebsite\bin\Release\mywebsite.1.0.0.nupkg"  --api-key ${{ secrets.NEXUS_API_KEY }} --source "nexus"
 
