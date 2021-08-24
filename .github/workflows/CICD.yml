@@ -55,7 +55,6 @@ jobs:
      #To Packackage dotnet Application
       - name: Package
         run: |
-          dir D:\a\mywebsite\mywebsite\mywebsite\bin\Debug\
           dotnet pack .\mywebsite --configuration Release
           
     #To Add nuget artifacts repository as source to push artifacts.
@@ -65,7 +64,7 @@ jobs:
     #To Push nuget package to artifacts repository using GitHub Secrets.
       - name: Push
         run: |
-          dotnet nuget push "D:\a\mywebsite\mywebsite\mywebsite\bin\Debug\mywebsite.1.0.0.nupkg"  --api-key ${{ secrets.NEXUS_API_KEY }} --source "nexus"
+          dotnet nuget push "D:\a\mywebsite\mywebsite\mywebsite\bin\Release\mywebsite.1.0.0.nupkg"  --api-key ${{ secrets.NEXUS_API_KEY }} --source "nexus"
 
     #To Test Using NUnit.
       - name: Nunit Testing
