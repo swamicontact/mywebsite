@@ -96,7 +96,7 @@ jobs:
     #To Push Artifacts to Git repository.
       - uses: actions/upload-artifact@v2
         with:
-          name: mywebsite-${{ env.GITHUB_RUN_NUMBER }}.zip"
+          name: mywebsite-${{ env.GITHUB_RUN_NUMBER }}.zip
           path: .\*.zip
           
     #To Push Artifacts to IIS.
