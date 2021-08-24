@@ -55,6 +55,7 @@ jobs:
      #To Packackage dotnet Application
       - name: Package
         run: |
+          dir D:\a\mywebsite\mywebsite\mywebsite\bin\Debug\
           dotnet pack .\mywebsite --configuration Release
           
     #To Add nuget artifacts repository as source to push artifacts.
