@@ -98,9 +98,7 @@ jobs:
       - uses: actions/upload-artifact@v2
         with:
           name: Push-Artifacts
-          env:
-            $ArtifactName=".\mywebsite-$env:GITHUB_RUN_NUMBER.zip"
-          path:  $ArtifactName    
+          path: .\*.zip
           
     #To Push Artifacts to IIS.
       - name: winrm
