@@ -62,9 +62,9 @@ jobs:
         run: dotnet nuget add source ${{ secrets.NEXUS_URL }} --name "nexus" --username  ${{ secrets.NEXUS_USER_NAME }} --password ${{ secrets.NEXUS_PASSWORD }}
 
     #To Push nuget package to artifacts repository using GitHub Secrets.
-      #- name: Push
-      #  run: |
-      #    dotnet nuget push "src\ApplicationCore\bin\Release\ApplicationCore.1.0.0.nupkg"  --api-key ${{ secrets.NEXUS_API_KEY }} --source "nexus"
+      - name: Push
+        run: |
+          dotnet nuget push "D:\a\mywebsite\mywebsite\mywebsite\bin\Debug\mywebsite.1.0.0.nupkg"  --api-key ${{ secrets.NEXUS_API_KEY }} --source "nexus"
 
     #To Test Using NUnit.
       - name: Nunit Testing
