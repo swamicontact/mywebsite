@@ -87,6 +87,6 @@ jobs:
           $JfrogArtifactoryCred = New-Object System.Management.Automation.PSCredential ( "${{ secrets.JFROG_ARTIFACTORY_USERNAME }}" , $JfrogArtifactoryPassword)
           $ArtifactSourceFile = "D:\a\mywebsite\mywebsite\$JfrogArtifactoryArtifactName.zip"
           $ArtifactDestinationUri = "${{ secrets.JFROG_ARTIFACTORY_RAW_REPO_URL }}/$JfrogArtifactoryArtifactName.zip"
-          Invoke-WebRequest -uri $ArtifactDestinationUri -UseBasicParsing -Method Put -Infile $ArtifactSourceFile -Credential $JfrogArtifactoryCred -AllowUnencryptedAuthentication
+          Invoke-WebRequest -uri $ArtifactDestinationUri -UseBasicParsing -Method Put -Infile $ArtifactSourceFile -Credential $JfrogArtifactoryCred
           $ArtifactDestinationUriLatest = "${{ secrets.JFROG_ARTIFACTORY_RAW_REPO_URL }}/$ArtifactName-latest.zip"
-          Invoke-WebRequest -uri $ArtifactDestinationUriLatest -UseBasicParsing -Method Put -Infile $ArtifactSourceFile -Credential $JfrogArtifactoryCred -AllowUnencryptedAuthentication
+          Invoke-WebRequest -uri $ArtifactDestinationUriLatest -UseBasicParsing -Method Put -Infile $ArtifactSourceFile -Credential $JfrogArtifactoryCred
