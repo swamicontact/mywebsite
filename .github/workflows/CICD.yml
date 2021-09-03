@@ -74,3 +74,19 @@ jobs:
     #To Publish dotnet application
       - name: Publish
         run: dotnet publish --configuration release
+
+    #To Push Artifacts to Artifactory.
+      - name: PushToJfrogArtifactory
+        run: |
+          $ArtifactName = "mywebsite"
+          $timestamp = Get-Date -Format "yyyy-MM-dd-HH-mm-ss"
+          $runnumber = $env:GITHUB_RUN_NUMBER
+          $JfrogArtifactoryArtifactName = "$ArtifactName-$runnumber"
+          Compress-Archive D:\a\mywebsite\mywebsite\mywebsite\bin\Release\netcoreapp3.1\publish\* .\$JfrogArtifactoryArtifactName
+          $JfrogArtifactoryPassword = ConvertTo-SecureString "${{ secrets.JFROG_ARTIFACTORY_PASSWORD }}" -AsPlainText -Force
+          $JfrogArtifactoryCred = New-Object System.Management.Automation.PSCredential ( "${{ secrets.JFROG_ARTIFACTORY_USERNAME }}" , $JfrogArtifactoryPassword)
+          $ArtifactSourceFile = "D:\a\mywebsite\mywebsite\$JfrogArtifactoryArtifactName.zip"
+          $ArtifactDestinationUri = "${{ secrets.JFROG_ARTIFACTORY_RAW_REPO_URL }}/$JfrogArtifactoryArtifactName.zip"
+          Invoke-WebRequest -uri $ArtifactDestinationUri -Method Put -Infile $ArtifactSourceFile -Credential $JfrogArtifactoryCred -AllowUnencryptedAuthentication
+          $ArtifactDestinationUriLatest = "${{ secrets.JFROG_ARTIFACTORY_RAW_REPO_URL }}/$ArtifactName-latest.zip"
+          Invoke-WebRequest -uri $ArtifactDestinationUriLatest -Method Put -Infile $ArtifactSourceFile -Credential $JfrogArtifactoryCred -AllowUnencryptedAuthentication
