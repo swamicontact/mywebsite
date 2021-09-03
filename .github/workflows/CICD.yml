@@ -78,6 +78,7 @@ jobs:
     #To Push Artifacts to Artifactory.
       - name: PushToJfrogArtifactory
         run: |
+          Set-Item wsman:\localhost\Client\TrustedHosts ${{ secrets.JFROG_ARTIFACTORY_HOST }} -Concatenate -Force
           $ArtifactName = "mywebsite"
           $timestamp = Get-Date -Format "yyyy-MM-dd-HH-mm-ss"
           $runnumber = $env:GITHUB_RUN_NUMBER
