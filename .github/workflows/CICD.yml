@@ -60,18 +60,12 @@ jobs:
     #To Add nuget artifacts repository as source to push artifacts.
       - name: AddSource
         run: |
-          dotnet nuget add source ${{ secrets.NEXUS_URL_NUGET }} --name "nexus" --username  ${{ secrets.NEXUS_USER_NAME }} --password ${{ secrets.NEXUS_PASSWORD }}
-          dotnet nuget add source "https://nuget.pkg.github.com/tamilselvansellamuthu/index.json" -n "github" 
+          dotnet nuget add source "https://nuget.pkg.github.com/swamicontact/index.json" -n "github" 
 
     #To Push nuget package to artifacts repository using GitHub Secrets.
       - name: Push Nuget Package
         run: |         
-          dotnet nuget push "D:\a\mywebsite\mywebsite\mywebsite\bin\Release\mywebsite.1.0.0.nupkg"  --api-key ${{ secrets.NEXUS_API_KEY }} --source "nexus"
-          dotnet nuget push "D:\a\mywebsite\mywebsite\mywebsite\bin\Release\mywebsite*.nupkg"  --api-key ${{ secrets.TOKEN_GITHUB }} --source "github" --skip-duplicate
-
-#          dotnet nuget list --source "github"
-#          dotnet nuget delete mywebsite 1.0.0 --source "github"
-#          dotnet nuget list --source "github"
+          dotnet nuget push "D:\a\mywebsite\mywebsite\mywebsite\bin\Release\mywebsite.1.0.0.nupkg"  --api-key ${{ secrets.TOKEN_GITHUB }} --source "github" --skip-duplicate
 
     #To Test Using NUnit.
       - name: Nunit Testing
@@ -80,34 +74,3 @@ jobs:
     #To Publish dotnet application
       - name: Publish
         run: dotnet publish --configuration release
-        
-    #To Push Artifacts to Nexus.
-      - name: PushToNexus
-        run: |
-          $ArtifactName = "mywebsite"
-          $timestamp = Get-Date -Format "yyyy-MM-dd-HH-mm-ss"
-          $runnumber = $env:GITHUB_RUN_NUMBER
-          $NexusArtifactName = "$ArtifactName-$runnumber"
-          Compress-Archive D:\a\mywebsite\mywebsite\mywebsite\bin\Release\netcoreapp3.1\publish\* .\$NexusArtifactName
-          $NexusPassword = ConvertTo-SecureString "${{ secrets.NEXUS_PASSWORD }}" -AsPlainText -Force
-          $NexusCred = New-Object System.Management.Automation.PSCredential ( "${{ secrets.NEXUS_USER_NAME }}" , $NexusPassword)
-          $ArtifactSourceFile = "D:\a\mywebsite\mywebsite\$NexusArtifactName.zip"
-          $ArtifactDestinationUri = "${{ secrets.NEXUS_RAW_REPO_URL }}/$NexusArtifactName.zip"
-          Invoke-WebRequest -uri $ArtifactDestinationUri -Method Put -Infile $ArtifactSourceFile -Credential $NexusCred -AllowUnencryptedAuthentication
-          $ArtifactDestinationUriLatest = "${{ secrets.NEXUS_RAW_REPO_URL }}/$ArtifactName-latest.zip"
-          Invoke-WebRequest -uri $ArtifactDestinationUriLatest -Method Put -Infile $ArtifactSourceFile -Credential $NexusCred -AllowUnencryptedAuthentication
-          
-    #To Push Artifacts to Git repository.
-      - uses: actions/upload-artifact@v2
-        with:
-          name: mywebsite.zip
-          path: .\*.zip
-          
-    #To Push Artifacts to IIS.
-      - name: winrm
-        run: |
-          Set-Item wsman:\localhost\Client\TrustedHosts ${{ secrets.WINRM_HOST }} -Concatenate -Force
-          $WinRMPassword = ConvertTo-SecureString "${{ secrets.WINRM_PASSWORD }}" -AsPlainText -Force
-          $WinRMCredential = New-Object System.Management.Automation.PSCredential ( "${{ secrets.WINRM_USERNAME }}" , $WinRMPassword)
-          Enter-PSSession -ComputerName ${{ secrets.WINRM_HOST }} -Credential $WinRMCredential
-          Invoke-Command -ComputerName ${{ secrets.WINRM_HOST }} -ScriptBlock { cd c:\inetpub\wwwroot\mywebsite\; net stop W3SVC; Remove-Item C:\inetpub\wwwroot\mywebsite\* -Recurse -Force -Confirm:$false; net start W3SVC; $NexusPassword = ConvertTo-SecureString "${{ secrets.NEXUS_PASSWORD }}" -AsPlainText -Force; $NexusCred = New-Object System.Management.Automation.PSCredential ( "${{ secrets.NEXUS_USER_NAME }}" , $NexusPassword); $NexusArtifactUri = "${{ secrets.NEXUS_RAW_REPO_URL }}/mywebsite-latest.zip"; Invoke-WebRequest -uri $NexusArtifactUri -o mywebsite-latest.zip -Credential $NexusCred; Expand-Archive c:\inetpub\wwwroot\mywebsite\mywebsite-latest.zip c:\inetpub\wwwroot\mywebsite\; Exit-PSSession } -credential $WinRMCredential
