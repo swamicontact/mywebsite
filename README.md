@@ -16,4 +16,4 @@ Sample ASP .Net Core application.
 6) run nunit test cases included.
 7) publish deployment artifacts to release.
 8) push the deployment artifacts to Nexus/GitHub Packages.
-9) deploy the packages to IIS server..
+9) deploy the packages to IIS server.
