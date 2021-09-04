@@ -61,11 +61,14 @@ jobs:
       - name: AddSource
         run: |
           dotnet nuget add source "https://nuget.pkg.github.com/swamicontact/index.json" -n "github" 
+          dotnet nuget add source "https://pkgs.dev.azure.com/tpmsomrolcrsn/bdm/_packaging/bdmngt/nuget/v3/index.json" -n "azurenuget" 
+          
 
     #To Push nuget package to artifacts repository using GitHub Secrets.
       - name: Push Nuget Package
         run: |         
           dotnet nuget push "D:\a\mywebsite\mywebsite\mywebsite\bin\Release\mywebsite.1.0.0.nupkg"  --api-key ${{ secrets.TOKEN_GITHUB }} --source "github" --skip-duplicate
+          dotnet nuget push "D:\a\mywebsite\mywebsite\mywebsite\bin\Release\mywebsite.1.0.0.nupkg"  --api-key ${{ secrets.TOKEN_AZURE_ARTIFACT }} --source "azurenuget" --skip-duplicate
 
     #To Test Using NUnit.
       - name: Nunit Testing
