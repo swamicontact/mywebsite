@@ -60,7 +60,7 @@ jobs:
     #To Add nuget artifacts repository as source to push artifacts.
       - name: AddSource
         run: |
-          dotnet nuget add source "https://pkgs.dev.azure.com/tpmsomrolcrsn/bdm/_packaging/nugetpkg1/nuget/v3/index.json" --name "nugetpkg1" --username "az" --password --api-key ${{ secrets.TOKEN_AZURE_ARTIFACT }}
+          dotnet nuget add source "https://pkgs.dev.azure.com/tpmsomrolcrsn/bdm/_packaging/nugetpkg1/nuget/v3/index.json" --name "nugetpkg1" --username "az" --password ${{ secrets.TOKEN_AZURE_ARTIFACT }}
           
 
     #To Push nuget package to artifacts repository using GitHub Secrets.
